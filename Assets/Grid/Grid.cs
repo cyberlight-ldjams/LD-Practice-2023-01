@@ -5,15 +5,36 @@ using UnityEngine;
 public class Grid : MonoBehaviour
 {
     [SerializeField]
-    private float _cellSize = 5;
+    private float _cellSize = 1;
 
-    public GridCell GetCell(float x, float y)
+    private List<GridCell> _gridCells;
+
+    public Grid()
     {
-
-        return new GridCell(new Vector2(0, 0));
+        _gridCells = new List<GridCell>();
     }
 
-    public Vector2 GetCellCenter(float x, float y)
+    /**
+     * Gets the cell associated with that location
+     * 
+     * If it does not exist yet, it creates it
+     */
+    public GridCell GetCell(float x, float y)
+    {
+        GridCell gc;
+        GridCell findGC;
+        Vector2 loc = GetCellLocation(x, y);
+        findGC = _gridCells.Find(gc => gc.Location.Equals(loc));
+        if (findGC != null)
+        {
+            return findGC;
+        } // else
+        gc = new GridCell(x, y);
+        _gridCells.Add(gc);
+        return gc;
+    }
+
+    public Vector2 GetCellLocation(float x, float y)
     {
         return new Vector2(RoundToCellSize(x), RoundToCellSize(y));
     }

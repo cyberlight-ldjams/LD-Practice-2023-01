@@ -1,26 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+// Needed for Vector2
 using UnityEngine;
 
-public class GridCell : MonoBehaviour
+public class GridCell
 {
-    [SerializeField]
-    private Vector2 location { get; set; }
+    public Vector2 Location { get; private set; }
 
     public GridCell(Vector2 location)
     {
-        this.location = location;
+        this.Location = location;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public GridCell(float x, float y)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        this.Location = new Vector2(x, y);
     }
 }
