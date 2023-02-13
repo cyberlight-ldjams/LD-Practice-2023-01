@@ -9,6 +9,8 @@ public class Grid : MonoBehaviour
 
     private List<GridCell> _gridCells;
 
+    public GameObject Selected { get; set; }
+
     public Grid()
     {
         _gridCells = new List<GridCell>();
@@ -21,17 +23,36 @@ public class Grid : MonoBehaviour
      */
     public GridCell GetCell(float x, float y)
     {
-        GridCell gc;
-        GridCell findGC;
+        GridCell findGC = null;
         Vector2 loc = GetCellLocation(x, y);
-        findGC = _gridCells.Find(gc => gc.Location.Equals(loc));
+
+        // See if that grid cell already exists
+        foreach (GridCell gc in _gridCells)
+        {
+            if (gc.Location.Equals(loc))
+            {
+                findGC = gc;
+                break;
+            }
+        }
+
         if (findGC != null)
         {
             return findGC;
         } // else
-        gc = new GridCell(x, y);
-        _gridCells.Add(gc);
-        return gc;
+        findGC = new GridCell(loc);
+        _gridCells.Add(findGC);
+        return findGC;
+    }
+
+    public GridCell GetCell(Vector2 location)
+    {
+        return GetCell(location.x, location.y);
+    }
+
+    public GridCell GetCell(Vector3 location)
+    {
+        return GetCell(location.x, location.z);
     }
 
     public Vector2 GetCellLocation(float x, float y)
@@ -39,11 +60,21 @@ public class Grid : MonoBehaviour
         return new Vector2(RoundToCellSize(x), RoundToCellSize(y));
     }
 
+    public GridCell GetCellLocation(Vector2 location)
+    {
+        return GetCell(location.x, location.y);
+    }
+
+    public GridCell GetCellLocation(Vector3 location)
+    {
+        return GetCell(location.x, location.z);
+    }
+
     private float RoundToCellSize(float x)
     {
         float multiple = Mathf.Round(x / _cellSize);
 
-        return multiple * _cellSize;
+        return Mathf.Round(multiple * _cellSize);
     }
 
     // Start is called before the first frame update
