@@ -82,10 +82,10 @@ public class Moveable : MonoBehaviour
                     // Move to the new cell;
                     if (currentCell != null)
                     {
-                        currentCell.GO = null;
+                        currentCell.RemoveGameObject();
                     }
                     currentCell = gridCell;
-                    gridCell.GO = this.gameObject;
+                    gridCell.SetGameObject(this.gameObject);
                 }
             } else
             {
