@@ -65,6 +65,16 @@ public class ResourceGenerator : MonoBehaviour
             }
 
             createResourcePatch(stone, new Vector2(xloc, yloc));
+                } else if (count == 50)
+                {
+                    spotAvailable = true;
+                }
+            }
+
+            if (count < 50)
+            {
+                createResourcePatch(stone, new Vector2(xloc, yloc));
+            }
         }
 
         spotAvailable = false;
@@ -80,8 +90,14 @@ public class ResourceGenerator : MonoBehaviour
                 if (!grid.GetCell(xloc, yloc).HasGameObject())
                 {
                     spotAvailable = true;
+                } else if (count == 50)
+                {
+                    spotAvailable = true;
                 }
+            }
 
+            if (count < 50)
+            {
                 createResourcePatch(wood, new Vector2(xloc, yloc));
             }
         }
