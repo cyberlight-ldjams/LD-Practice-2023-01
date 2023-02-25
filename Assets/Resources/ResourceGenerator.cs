@@ -4,10 +4,31 @@ using UnityEngine;
 
 public class ResourceGenerator : MonoBehaviour
 {
-    public List<Resource> resourceTypes;
+    private List<Resource> resourceTypes;
 
     [SerializeField]
-    Grid grid;
+    private Vector2Int resourceRange = new Vector2Int(50, 50);
+
+    [SerializeField]
+    private Vector2Int stonePatchRange = new Vector2Int(3, 7);
+
+    [SerializeField]
+    private float stoneRarity = 0.5f;
+
+    [SerializeField]
+    private float stoneSpread = 0.5f;
+
+    [SerializeField]
+    private Vector2Int woodPatchRange = new Vector2Int(3, 7);
+
+    [SerializeField]
+    private float woodRarity = 0.5f;
+
+    [SerializeField]
+    private float woodSpread = 0.5f;
+
+    [SerializeField]
+    private Grid grid;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +39,37 @@ public class ResourceGenerator : MonoBehaviour
             grid = gridGO.GetComponent<Grid>();
         }
 
-        GenerateResourcePatch(new Resource("Rock", 0.5f, 0.5f), new Vector2(0, 0));
+        Resource stone = new Resource("Stone", stoneRarity, stoneSpread);
+        Resource wood = new Resource("Wood", woodRarity, woodSpread);
+
+        resourceTypes.Add(stone);
+        resourceTypes.Add(wood);
+
+        bool spotAvailable = false;
+        int xloc = 0;
+        int yloc = 0;
+        int stonePatchCount = Random.Range(stonePatchRange.x, stonePatchRange.y);
+        for (int i = 0; i < stonePatchCount; i++)
+        {
+            while (!spotAvailable)
+            {
+                xloc = Random.Range(-resourceRange.x, resourceRange.x);
+                yloc = Random.Range(-resourceRange.y, resourceRange.y);
+            }
+
+
+        }
+
+        spotAvailable = false;
+        int woodPatchCount = Random.Range(woodPatchRange.x, woodPatchRange.y);
+        for (int i = 0; i < woodPatchCount; i++)
+        {
+            while (!spotAvailable)
+            {
+                xloc = Random.Range(-resourceRange.x, resourceRange.x);
+                yloc = Random.Range(-resourceRange.y, resourceRange.y);
+            }
+        }
     }
 
     public bool GenerateResourcePatch(Resource resource, Vector2 location)

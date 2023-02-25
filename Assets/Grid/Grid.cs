@@ -7,14 +7,9 @@ public class Grid : MonoBehaviour
     [SerializeField]
     private float _cellSize = 1;
 
-    private List<GridCell> _gridCells;
+    private List<GridCell> _gridCells = new List<GridCell>();
 
     public GameObject Selected { get; set; }
-
-    public Grid()
-    {
-        _gridCells = new List<GridCell>();
-    }
 
     /**
      * Gets the cell associated with that location
