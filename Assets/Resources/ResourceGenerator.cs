@@ -61,6 +61,10 @@ public class ResourceGenerator : MonoBehaviour
                 {
                     spotAvailable = true;
                     count++;
+                }
+            }
+
+            createResourcePatch(stone, new Vector2(xloc, yloc));
                 } else if (count == 50)
                 {
                     spotAvailable = true;
