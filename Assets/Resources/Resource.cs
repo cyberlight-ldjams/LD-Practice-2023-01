@@ -30,18 +30,17 @@ public class Resource : MonoBehaviour
      * The "spread" value determines how likely there is to be a new starting point 
      * next to the original for the patch to keep growing.
      */
-    public Resource(string type, float rarity, float spread)
+    public Resource createResource(string type, float rarity, float spread, GameObject prefab)
     {
         this.type = type;
         this.rarity = rarity;
         this.spread = spread;
 
 
-        //TODO - Make this generate a prefab
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        cube.transform.position = new Vector3(0, 2f, 0);
-        cube.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-        cube.AddComponent<Moveable>();
-        resource = cube;
+        //TODO - Make this use a prefab and don't make it moveable
+        resource = Instantiate(prefab, new Vector3(0, 2f, 0), Quaternion.identity);
+        resource.AddComponent<Moveable>();
+
+        return this;
     }
 }

@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class ResourceGenerator : MonoBehaviour
 {
-    private List<Resource> resourceTypes;
+    //private List<Resource> resourceTypes;
 
     [SerializeField]
     private Vector2Int resourceRange = new Vector2Int(50, 50);
 
     [SerializeField]
     private Vector2Int stonePatchRange = new Vector2Int(3, 7);
+
+    [SerializeField]
+    private GameObject stonePrefab;
 
     [SerializeField]
     private float stoneRarity = 0.5f;
@@ -22,6 +25,9 @@ public class ResourceGenerator : MonoBehaviour
     private Vector2Int woodPatchRange = new Vector2Int(3, 7);
 
     [SerializeField]
+    private GameObject woodPrefab;
+
+    [SerializeField]
     private float woodRarity = 0.5f;
 
     [SerializeField]
@@ -29,6 +35,10 @@ public class ResourceGenerator : MonoBehaviour
 
     [SerializeField]
     private Grid grid;
+
+    private Resource stone;
+
+    private Resource wood;
 
     // Start is called before the first frame update
     void Start()
@@ -39,19 +49,18 @@ public class ResourceGenerator : MonoBehaviour
             grid = gridGO.GetComponent<Grid>();
         }
 
-        Resource stone = new Resource("Stone", stoneRarity, stoneSpread);
-        Resource wood = new Resource("Wood", woodRarity, woodSpread);
+        stone = new Resource();
+        wood = new Resource();
 
-        resourceTypes.Add(stone);
-        resourceTypes.Add(wood);
-
-        bool spotAvailable = false;
-        int count = 0;
+        bool spotAvailable;
+        int count;
         int xloc = 0;
         int yloc = 0;
         int stonePatchCount = Random.Range(stonePatchRange.x, stonePatchRange.y);
         for (int i = 0; i < stonePatchCount; i++)
         {
+            count = 0;
+            spotAvailable = false;
             while (!spotAvailable)
             {
                 xloc = Random.Range(-resourceRange.x, resourceRange.x);
@@ -60,8 +69,8 @@ public class ResourceGenerator : MonoBehaviour
                 if (!grid.GetCell(xloc, yloc).HasGameObject())
                 {
                     spotAvailable = true;
-                    count++;
-                } else if (count == 50)
+                }
+                else if (count == 50)
                 {
                     spotAvailable = true;
                 }
@@ -73,11 +82,11 @@ public class ResourceGenerator : MonoBehaviour
             }
         }
 
-        spotAvailable = false;
-        count = 0;
         int woodPatchCount = Random.Range(woodPatchRange.x, woodPatchRange.y);
         for (int i = 0; i < woodPatchCount; i++)
         {
+            count = 0;
+            spotAvailable = false;
             while (!spotAvailable)
             {
                 xloc = Random.Range(-resourceRange.x, resourceRange.x);
@@ -106,7 +115,9 @@ public class ResourceGenerator : MonoBehaviour
 
     private bool createResourcePatch(Resource resource, Vector2 location)
     {
-        Debug.Log("Place first resource");
+        Debug.Log("Place first " + resource.type + " at " + location);
+        resource = resource.createResource(resource.type, resource.rarity, 
+            resource.spread, resource.resource);
         bool placed = placeResource(resource, location);
 
         int count = 0;
@@ -123,8 +134,10 @@ public class ResourceGenerator : MonoBehaviour
                     {
                         if (!gc.HasGameObject())
                         {
-                            placeResource(new Resource
-                                (resource.type, resource.rarity, resource.spread), gc);
+                            Debug.Log("Place " + resource.type + " " + count + " at " + location);
+                            resource = resource.createResource(resource.type, resource.rarity,
+                                resource.spread, resource.resource);
+                            placeResource(resource, gc);
                         }
                     }
                 }

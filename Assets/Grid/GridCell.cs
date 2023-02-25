@@ -25,11 +25,11 @@ public class GridCell
                 {
                     GO = null;
                     return false;
-                } // else
+                } // else the GO is in this cell
                 return true;
-            } // else
+            } // else the GO doesn't have a moveable component, but it exists
             return true;
-        } // else
+        } // else, GO is null
         return false;
     }
 
