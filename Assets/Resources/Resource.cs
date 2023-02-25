@@ -40,6 +40,8 @@ public class Resource
         //TODO - Make this generate a prefab
         GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         cube.transform.position = new Vector3(0, 2f, 0);
+        cube.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+        cube.AddComponent<Moveable>();
         resource = cube;
     }
 }

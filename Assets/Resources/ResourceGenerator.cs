@@ -17,6 +17,8 @@ public class ResourceGenerator : MonoBehaviour
             GameObject gridGO = GameObject.FindGameObjectWithTag("Grid");
             grid = gridGO.GetComponent<Grid>();
         }
+
+        GenerateResourcePatch(new Resource("Rock", 0.5f, 0.5f), new Vector2(0, 0));
     }
 
     public bool GenerateResourcePatch(Resource resource, Vector2 location)
@@ -41,8 +43,11 @@ public class ResourceGenerator : MonoBehaviour
                     // Place more resources
                     if (Random.Range(0, 1f) < resource.rarity)
                     {
-                        placeResource(new Resource
-                            (resource.type, resource.rarity, resource.spread), gc);
+                        if (!gc.HasGameObject())
+                        {
+                            placeResource(new Resource
+                                (resource.type, resource.rarity, resource.spread), gc);
+                        }
                     }
                 }
 
