@@ -279,12 +279,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f360b1101db16c4ca9138a767e4e9a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stonePatchRange: {x: 3, y: 7}
-  stoneRarity: 0.5
-  stoneSpread: 0.5
-  woodPatchRange: {x: 3, y: 7}
-  woodRarity: 0.5
-  woodSpread: 0.5
+  resourceTypes: []
+  resourceRange: {x: 50, y: 50}
   grid: {fileID: 681766986}
 --- !u!1 &1990862962
 GameObject:
@@ -364,7 +360,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1990862962}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 0, y: 50, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
