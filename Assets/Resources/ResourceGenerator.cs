@@ -64,8 +64,11 @@ public class ResourceGenerator : MonoBehaviour
 
     private bool createResourcePatch(Resource resource, Vector2 location)
     {
-        Debug.Log("Place first " + resource.Name + " at " + location);
-        bool placed = placeResource(resource, location);
+        bool placed = false;
+        if (!grid.GetCell(location).HasGameObject())
+        {
+            placed = placeResource(resource, location);
+        }
 
         int count = 0;
         if (placed)
@@ -81,7 +84,6 @@ public class ResourceGenerator : MonoBehaviour
                     {
                         if (!gc.HasGameObject())
                         {
-                            Debug.Log("Place " + resource.Name + " " + count + " at " + location);
                             placeResource(resource, gc);
                         }
                     }
@@ -111,6 +113,7 @@ public class ResourceGenerator : MonoBehaviour
         bool placed = location.SetGameObject(model);
         Instantiate(model, new Vector3(location.Location.x, 2f, location.Location.y), 
             Quaternion.identity);
+        model.name = resource.name + " " + location.Location;
         model.AddComponent<Moveable>();
         return placed;
     }

@@ -31,7 +31,14 @@ public class Resource : ScriptableObject
 
     public GameObject GetRandomModel()
     {
-        if(_chosenModel == null)
+        _chosenModel = modelOptions[Random.Range(0, modelOptions.Count)];
+
+        return _chosenModel;
+    }
+
+    public GameObject GetChosenModel()
+    {
+        if (_chosenModel == null)
         {
             _chosenModel = modelOptions[Random.Range(0, modelOptions.Count)];
         }
