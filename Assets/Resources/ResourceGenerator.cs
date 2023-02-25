@@ -46,6 +46,7 @@ public class ResourceGenerator : MonoBehaviour
         resourceTypes.Add(wood);
 
         bool spotAvailable = false;
+        int count = 0;
         int xloc = 0;
         int yloc = 0;
         int stonePatchCount = Random.Range(stonePatchRange.x, stonePatchRange.y);
@@ -55,12 +56,19 @@ public class ResourceGenerator : MonoBehaviour
             {
                 xloc = Random.Range(-resourceRange.x, resourceRange.x);
                 yloc = Random.Range(-resourceRange.y, resourceRange.y);
+
+                if (!grid.GetCell(xloc, yloc).HasGameObject())
+                {
+                    spotAvailable = true;
+                    count++;
+                }
             }
 
-
+            createResourcePatch(stone, new Vector2(xloc, yloc));
         }
 
         spotAvailable = false;
+        count = 0;
         int woodPatchCount = Random.Range(woodPatchRange.x, woodPatchRange.y);
         for (int i = 0; i < woodPatchCount; i++)
         {
@@ -68,6 +76,13 @@ public class ResourceGenerator : MonoBehaviour
             {
                 xloc = Random.Range(-resourceRange.x, resourceRange.x);
                 yloc = Random.Range(-resourceRange.y, resourceRange.y);
+
+                if (!grid.GetCell(xloc, yloc).HasGameObject())
+                {
+                    spotAvailable = true;
+                }
+
+                createResourcePatch(wood, new Vector2(xloc, yloc));
             }
         }
     }
