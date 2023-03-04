@@ -279,6 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f360b1101db16c4ca9138a767e4e9a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceRange: {x: 50, y: 50}
   stonePatchRange: {x: 3, y: 7}
   stoneRarity: 0.5
   stoneSpread: 0.5
