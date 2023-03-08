@@ -65,8 +65,6 @@ public class Mortality : MonoBehaviour
     {
         _onDeath -= method;
         GameObject obj = new GameObject();
-        )
-
     }
 
 
