@@ -90,7 +90,7 @@ public class Mortality : MonoBehaviour
             int KeyValue = int.Parse(key.Substring(1));
 
             //Make sure that the percentage they care about is between the new and old healths.
-            bool calculation = _healthPercentage > KeyValue && KeyValue >= perce;
+            bool calculation = _healthPercentage > KeyValue && KeyValue >= percentage;
 
             //The calculation flips if we care about healing instead of taking damage.
             if ((key == "-" && calculation) ||
