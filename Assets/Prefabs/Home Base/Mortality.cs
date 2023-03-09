@@ -64,7 +64,6 @@ public class Mortality : MonoBehaviour
     public void UnregisterOnDeath(Action method)
     {
         _onDeath -= method;
-        GameObject obj = new GameObject();
     }
 
 
