@@ -18,6 +18,7 @@ public class Mortality : MonoBehaviour
     private Dictionary<string, Action> _damageCallbacks = new Dictionary<string, Action>();
 
     private Action _onDeath;
+    private Action<float> _onHealthChanged;
 
     #region Event Registrations
 
@@ -31,6 +32,11 @@ public class Mortality : MonoBehaviour
         {
             _damageCallbacks[key] += method;
         }
+    }
+
+    public float GetMaxHealth()
+    {
+        return _maxHealth;
     }
 
     /**
@@ -64,7 +70,16 @@ public class Mortality : MonoBehaviour
     public void UnregisterOnDeath(Action method)
     {
         _onDeath -= method;
-        GameObject obj = new GameObject();
+    }
+
+    public void RegisterHealthChanged(Action<float> method)
+    {
+        _onHealthChanged += method;
+    }
+
+    public void UnregisterHealthChanged(Action<float> method)
+    {
+        _onHealthChanged += method;
     }
 
 
@@ -78,6 +93,9 @@ public class Mortality : MonoBehaviour
         string key = (_health < previousHealth)? "-" : "+";
 
         int percentage = (int)(_health / _maxHealth) * 100;
+
+        //Announce the new health
+        _onHealthChanged(_health);
 
         //check if anyone cares about a damage percentage that we passed
         foreach(KeyValuePair<string, Action> entry in _damageCallbacks)
@@ -106,7 +124,7 @@ public class Mortality : MonoBehaviour
         _health = Mathf.Clamp(_health, 0f, _maxHealth);
 
         //Did we die?
-        if (_health == 0f)
+        if (_health == 0f && _onDeath != null)
         {
             _onDeath(); //same as _onDeath.Invoke();
         }
