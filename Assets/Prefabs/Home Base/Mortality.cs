@@ -95,7 +95,10 @@ public class Mortality : MonoBehaviour
         int percentage = (int)(_health / _maxHealth) * 100;
 
         //Announce the new health
-        _onHealthChanged(_health);
+        if (_onHealthChanged != null)
+        {
+            _onHealthChanged(_health);
+        }
 
         //check if anyone cares about a damage percentage that we passed
         foreach(KeyValuePair<string, Action> entry in _damageCallbacks)
