@@ -24,6 +24,9 @@ public class WaveSystem : MonoBehaviour
     [SerializeField]
     private int EnemyValueMax = 150;
 
+    [SerializeField]
+    private Wave[] Waves;
+
     private int nextWaveTime;
 
     private int nextEnemyValue;
@@ -88,6 +91,8 @@ public class WaveSystem : MonoBehaviour
 
     private void SpawnWave(int EnemyValue)
     {
-
+        int wave = Random.Range(0, Waves.Length);
+        Waves[wave].CreateWave(EnemyValue);
+        Waves[wave].SpawnWholeWave();
     }
 }

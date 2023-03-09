@@ -40,13 +40,15 @@ public class Wave : MonoBehaviour
 
             count++;
         }
+
+        nextEnemy = 0;
     }
 
     public void SpawnNextEnemy()
     {
         if (nextEnemy < enemies.Count)
         {
-            Instantiate(possibleEnemies[nextEnemy]);
+            Instantiate(possibleEnemies[enemies[nextEnemy]]);
             nextEnemy++;
         }
     }

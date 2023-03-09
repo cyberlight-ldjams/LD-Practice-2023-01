@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
 
     public float Range = 3f;
 
-    public float Damage = 3f;
+    public float Damage = 1f;
 
     // Attacks per second
     public float AttackSpeed = 0.67f;
