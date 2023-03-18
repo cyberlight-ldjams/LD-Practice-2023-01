@@ -1,9 +1,49 @@
 fileFormatVersion: 2
-guid: 385b4f4339d692f4085022ed850df33f
+guid: 5017a79cb2a60794bb581054809c29c2
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bronze
+    second: {fileID: 2100000, guid: f139a685e6d7afd498b33f569e3db640, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Log
+    second: {fileID: 2100000, guid: d07fbef29cccc54459ef9cb7cdb526f1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Logrings
+    second: {fileID: 2100000, guid: 7049133c58df7d8499256101ef4d6acb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: 993c465491cde3a499541438de2efbfe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.008
+    second: {fileID: 2100000, guid: ae3bf8171e8e3444da4ba0805e4850e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plankwood
+    second: {fileID: 2100000, guid: f562f6014dd317c45a529076ee220ab3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Steel
+    second: {fileID: 2100000, guid: 51439953853d0c64a8e028d61152702d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SteelAccented
+    second: {fileID: 2100000, guid: e82abe1c002d58a44846af044e147249, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -51,8 +91,8 @@ ModelImporter:
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
-    bakeAxisConversion: 0
-    preserveHierarchy: 0
+    bakeAxisConversion: 1
+    preserveHierarchy: 1
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
