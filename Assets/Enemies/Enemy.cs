@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     // Attacks per second
     public float AttackSpeed = 0.67f;
 
+    public Mortality SubjectiveMortality;
+
     private float TimeToAttack = 0f;
 
     public GameObject PlayerBase;
@@ -60,8 +62,15 @@ public class Enemy : MonoBehaviour
             PlayerBase = GameObject.FindGameObjectWithTag("Base");
         }
 
+        if (SubjectiveMortality == null)
+        {
+            SubjectiveMortality = GetComponent<Mortality>();
+        }
+
         currentObjective = PlayerBase;
         objectiveMortality = currentObjective.GetComponent<Mortality>();
+
+        SubjectiveMortality.RegisterOnDeath(OnDeath);
 
         nav.destination = currentObjective.transform.position;
     }
@@ -95,8 +104,6 @@ public class Enemy : MonoBehaviour
                 float damage = Damage * (Random.value * 2);
 
                 objectiveMortality.TakeDamage(damage);
-
-                Debug.Log("ATTACK!");
 
                 TimeToAttack = 0;
             }
@@ -173,5 +180,11 @@ public class Enemy : MonoBehaviour
         }
 
         return ooi;
+    }
+
+    void OnDeath()
+    {
+        objectiveMortality.UnregisterOnDeath(GetNewObjective);
+        gameObject.SetActive(false);
     }
 }
