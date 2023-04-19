@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Grid
+  - Base
+  - Tower
+  - Mine
   layers:
   - Default
   - TransparentFX

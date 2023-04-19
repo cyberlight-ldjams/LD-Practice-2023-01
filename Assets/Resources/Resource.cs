@@ -1,47 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Resource : MonoBehaviour
+[CreateAssetMenu(menuName = "Custom/Game Resource", fileName = "Resource")]
+public class Resource : ScriptableObject
 {
-    [SerializeField]
-    public string type { get; private set; }
+    private GameObject _chosenModel = null;
+
+    public string Name;
+
+    [Range(0f, 1f)]
+    public float Rarity;
+
+    [Range(0f, 1f)]
+    public float Spread;
+
+    [Range(0f, 5f)]
+    public float HarvestSpeed = 1.0f;
+
+    [Range(0f, 10f)]
+    public float HarvestLevel = 0f;
 
     [SerializeField]
-    public float rarity { get; private set; }
+    public Vector2Int AmountRange = new Vector2Int(3, 7);
 
-    [SerializeField]
-    public float spread { get; private set; }
+    public Image Icon;  //can set to default image?
 
-    [SerializeField]
-    public GameObject resource { get; private set; }
+    public List<GameObject> modelOptions;
 
-    void Start()
+    public GameObject GetRandomModel()
     {
-        if (resource == null)
-        {
-            resource = new GameObject();
-        }
+        _chosenModel = modelOptions[Random.Range(0, modelOptions.Count)];
+
+        return _chosenModel;
     }
 
-    /**
-     * The "rarity" value of the resource determines how likely a new resource tile 
-     * will spawn next to the starting point. 
-     * The "spread" value determines how likely there is to be a new starting point 
-     * next to the original for the patch to keep growing.
-     */
-    public Resource(string type, float rarity, float spread)
+    public GameObject GetChosenModel()
     {
-        this.type = type;
-        this.rarity = rarity;
-        this.spread = spread;
+        if (_chosenModel == null)
+        {
+            _chosenModel = modelOptions[Random.Range(0, modelOptions.Count)];
+        }
 
-
-        //TODO - Make this generate a prefab
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        cube.transform.position = new Vector3(0, 2f, 0);
-        cube.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-        cube.AddComponent<Moveable>();
-        resource = cube;
+        return _chosenModel;
     }
 }

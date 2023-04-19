@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,6 @@ public class Grid : MonoBehaviour
      */
     public GridCell GetCell(float x, float y)
     {
-        GridCell findGC = null;
         Vector2 loc = GetCellLocation(x, y);
 
         // See if that grid cell already exists
@@ -26,18 +26,14 @@ public class Grid : MonoBehaviour
         {
             if (gc.Location.Equals(loc))
             {
-                findGC = gc;
-                break;
+                Debug.Log("Location " + gc.Location.x + ", " + gc.Location.y + " already exists");
+                return gc;
             }
-        }
-
-        if (findGC != null)
-        {
-            return findGC;
-        } // else
-        findGC = new GridCell(loc);
-        _gridCells.Add(findGC);
-        return findGC;
+        } // else, make a new grid cell
+        GridCell ngc = new GridCell(loc);
+        _gridCells.Add(ngc);
+        Debug.Log($"Location {ngc.Location.x}, {ngc.Location.y} created");
+        return ngc;
     }
 
     public GridCell GetCell(Vector2 location)
