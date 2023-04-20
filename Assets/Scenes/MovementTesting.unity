@@ -399,6 +399,10 @@ MonoBehaviour:
   EnemyValueMax: 150
   Waves:
   - {fileID: 393425908}
+  SpawnPoints:
+  - {x: -40, y: 1, z: 0}
+  - {x: 0, y: 1, z: 40}
+  - {x: 0, y: 1, z: -40}
 --- !u!4 &393425907
 Transform:
   m_ObjectHideFlags: 0
@@ -428,6 +432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   possibleEnemies:
   - {fileID: 5858173080025405343, guid: 695b2531308e7794d907bf333236ca61, type: 3}
+  spawnPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &681766985
 GameObject:
   m_ObjectHideFlags: 0

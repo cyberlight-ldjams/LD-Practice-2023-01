@@ -20,4 +20,4 @@ MonoBehaviour:
   AmountRange: {x: 3, y: 7}
   Icon: {fileID: 0}
   modelOptions:
-  - {fileID: 4678755171786376390, guid: 6c37879446c546746895da7b23e3a462, type: 3}
+  - {fileID: 9214036836547798448, guid: 37e7c255fd9a1be4eb1aab7c4d6b72b1, type: 3}
