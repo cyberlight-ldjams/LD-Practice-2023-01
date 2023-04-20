@@ -27,6 +27,9 @@ public class WaveSystem : MonoBehaviour
     [SerializeField]
     private Wave[] Waves;
 
+    [SerializeField]
+    private Vector3[] SpawnPoints;
+
     private int nextWaveTime;
 
     private int nextEnemyValue;
@@ -92,6 +95,9 @@ public class WaveSystem : MonoBehaviour
     private void SpawnWave(int EnemyValue)
     {
         int wave = Random.Range(0, Waves.Length);
+        Vector3 spawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
+
+        Waves[wave].SetSpawnPoint(spawnPoint);
         Waves[wave].CreateWave(EnemyValue);
         Waves[wave].SpawnWholeWave();
     }

@@ -10,10 +10,10 @@ public class Enemy : MonoBehaviour
 
     public float Range = 3f;
 
-    public float Damage = 1f;
+    public float Damage = 2f;
 
     // Attacks per second
-    public float AttackSpeed = 0.67f;
+    public float AttackSpeed = 1.5f;
 
     public Mortality SubjectiveMortality;
 
@@ -44,8 +44,8 @@ public class Enemy : MonoBehaviour
         levelOfInterest = new Dictionary<string, float>
         {
             { "Base", 100 },
-            { "Tower", 50 },
-            { "Mine", 20 }
+            { "Tower", 90 },
+            { "Mine", 80 }
         };
 
         nav = GetComponent<NavMeshAgent>();
@@ -73,6 +73,8 @@ public class Enemy : MonoBehaviour
         SubjectiveMortality.RegisterOnDeath(OnDeath);
 
         nav.destination = currentObjective.transform.position;
+
+        waitingForFirstObjective = true;
     }
 
     // Update is called once per frame
@@ -109,6 +111,11 @@ public class Enemy : MonoBehaviour
             }
         } else
         {
+            if ((1f / AttackSpeed) < TimeToAttack)
+            {
+                GetNewObjective();
+                TimeToAttack = 0;
+            }
             nav.isStopped = false;
         }
     }

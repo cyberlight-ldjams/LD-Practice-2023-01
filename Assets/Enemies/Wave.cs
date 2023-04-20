@@ -7,6 +7,9 @@ public class Wave : MonoBehaviour
     [SerializeField]
     private Enemy[] possibleEnemies;
 
+    [SerializeField]
+    private Vector3 spawnPoint;
+
     // Stored as a reference for the possible enemies array
     private List<int> enemies;
 
@@ -16,6 +19,11 @@ public class Wave : MonoBehaviour
     {
         nextEnemy = 0;
         enemies = new List<int>();
+    }
+
+    public void SetSpawnPoint(Vector3 location)
+    {
+        spawnPoint = location;
     }
 
     public void CreateWave(int EnemyValue)
@@ -48,7 +56,7 @@ public class Wave : MonoBehaviour
     {
         if (nextEnemy < enemies.Count)
         {
-            Instantiate(possibleEnemies[enemies[nextEnemy]]);
+            Instantiate(possibleEnemies[enemies[nextEnemy]], spawnPoint, Quaternion.identity);
             nextEnemy++;
         }
     }
