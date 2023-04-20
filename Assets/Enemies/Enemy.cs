@@ -10,10 +10,12 @@ public class Enemy : MonoBehaviour
 
     public float Range = 3f;
 
-    public float Damage = 1f;
+    public float Damage = 2f;
 
     // Attacks per second
-    public float AttackSpeed = 0.67f;
+    public float AttackSpeed = 1.5f;
+
+    public Mortality SubjectiveMortality;
 
     private float TimeToAttack = 0f;
 
@@ -42,8 +44,8 @@ public class Enemy : MonoBehaviour
         levelOfInterest = new Dictionary<string, float>
         {
             { "Base", 100 },
-            { "Tower", 50 },
-            { "Mine", 20 }
+            { "Tower", 90 },
+            { "Mine", 80 }
         };
 
         nav = GetComponent<NavMeshAgent>();
@@ -60,10 +62,19 @@ public class Enemy : MonoBehaviour
             PlayerBase = GameObject.FindGameObjectWithTag("Base");
         }
 
+        if (SubjectiveMortality == null)
+        {
+            SubjectiveMortality = GetComponent<Mortality>();
+        }
+
         currentObjective = PlayerBase;
         objectiveMortality = currentObjective.GetComponent<Mortality>();
 
+        SubjectiveMortality.RegisterOnDeath(OnDeath);
+
         nav.destination = currentObjective.transform.position;
+
+        waitingForFirstObjective = true;
     }
 
     // Update is called once per frame
@@ -96,12 +107,15 @@ public class Enemy : MonoBehaviour
 
                 objectiveMortality.TakeDamage(damage);
 
-                Debug.Log("ATTACK!");
-
                 TimeToAttack = 0;
             }
         } else
         {
+            if ((1f / AttackSpeed) < TimeToAttack)
+            {
+                GetNewObjective();
+                TimeToAttack = 0;
+            }
             nav.isStopped = false;
         }
     }
@@ -173,5 +187,11 @@ public class Enemy : MonoBehaviour
         }
 
         return ooi;
+    }
+
+    void OnDeath()
+    {
+        objectiveMortality.UnregisterOnDeath(GetNewObjective);
+        gameObject.SetActive(false);
     }
 }

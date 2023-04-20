@@ -114,7 +114,6 @@ public class ResourceGenerator : MonoBehaviour
         Instantiate(model, new Vector3(location.Location.x, 2f, location.Location.y), 
             Quaternion.identity);
         model.name = resource.name + " " + location.Location;
-        model.AddComponent<Moveable>();
         return placed;
     }
 

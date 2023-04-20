@@ -44,8 +44,27 @@ public class Moveable : MonoBehaviour
     {
         if (!selected && Mouse.current.leftButton.wasPressedThisFrame && grid.Selected == null)
         {
-            selected = true;
+            Select(true);
+        }
+    }
+
+    public void Select(bool select)
+    {
+        selected = select;
+
+        if (grid == null)
+        {
+            GameObject gridGO = GameObject.FindGameObjectWithTag("Grid");
+            grid = gridGO.GetComponent<Grid>();
+        }
+
+        if (select)
+        {
             grid.Selected = this.gameObject;
+        } else
+        {
+            grid.Selected = null;
+            selectedTime = 0;
         }
     }
 
@@ -75,9 +94,7 @@ public class Moveable : MonoBehaviour
                 if (selectedTime >= minSelectionTime &&
                     Mouse.current.leftButton.wasPressedThisFrame)
                 {
-                    selected = false;
-                    selectedTime = 0;
-                    grid.Selected = null;
+                    Select(false);
 
                     // Move to the new cell;
                     if (currentCell != null)

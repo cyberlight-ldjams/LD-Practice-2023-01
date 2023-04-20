@@ -39,6 +39,11 @@ public class ResourceOld : MonoBehaviour
 
         //TODO - Make this use a prefab and don't make it moveable
         resource = Instantiate(prefab, new Vector3(0, 2f, 0), Quaternion.identity);
+        Moveable[] ms = resource.GetComponents<Moveable>();
+        foreach(Moveable m in ms)
+        {
+            Destroy(m);
+        }
         resource.AddComponent<Moveable>();
 
         return this;

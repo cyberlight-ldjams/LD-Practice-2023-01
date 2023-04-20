@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 5858173080025405337}
   - component: {fileID: 5858173080025405342}
   - component: {fileID: 5858173080025405343}
+  - component: {fileID: 4960422836561140600}
   m_Layer: 0
   m_Name: BasicEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,5 +139,20 @@ MonoBehaviour:
   Range: 3
   Damage: 1
   AttackSpeed: 0.67
+  SubjectiveMortality: {fileID: 4960422836561140600}
   PlayerBase: {fileID: 0}
   distanceForCaring: 20
+--- !u!114 &4960422836561140600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5858173080025405340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9273a3a7a2011e4b9ea5af20717b5c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
+  _health: 100
