@@ -15,7 +15,7 @@ public class TowerBehavior : MonoBehaviour
 
     public Mortality SubjectiveMortality;
 
-    private Enemy target;
+    public Enemy target;
 
     private float Delay = 0f;
 
@@ -45,17 +45,15 @@ public class TowerBehavior : MonoBehaviour
         {
             if (Delay > TargetingDelay)
             {
-                Debug.Log("Targeting!");
+                MuzzleLocation = this.gameObject.transform.position;
                 target = TargetEnemy();
 
                 // If we still don't have a target, reset the delay
                 if (target == null)
                 {
-                    //Debug.Log("No Target!");
                     Delay = 0;
                 } else
                 {
-                    Debug.Log("Target Acquired!");
                     target.GetComponent<Mortality>().RegisterOnDeath(ChangeTarget);
                 }
             }
@@ -68,7 +66,6 @@ public class TowerBehavior : MonoBehaviour
         // Fire at the target after a delay
         else if (Delay > TargetingDelay)
         {
-            Debug.Log("FIRE!");
             FireAt(target);
             Delay = 0;
         }
@@ -76,8 +73,10 @@ public class TowerBehavior : MonoBehaviour
 
     private void ChangeTarget()
     {
-        target.GetComponent<Mortality>().UnregisterOnDeath(ChangeTarget);
-        target = null;
+        if (target != null) {
+            target.GetComponent<Mortality>().UnregisterOnDeath(ChangeTarget);
+            target = null;
+        }
     }
 
     private void FireAt(Vector3 location)
@@ -103,7 +102,6 @@ public class TowerBehavior : MonoBehaviour
             {
                 return c.gameObject.GetComponent<Enemy>();
             }
-            Debug.Log(c + " " + c.gameObject.tag);
         }
 
         return null;

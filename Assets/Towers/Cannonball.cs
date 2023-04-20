@@ -38,8 +38,6 @@ public class Cannonball : MonoBehaviour
 
         gameObject.transform.position = Vector3.Lerp(StartingPoint, EndingPoint, progress);
 
-        Debug.Log(gameObject.transform.position + " " + progress);
-
         if (progress >= 1f)
         {
             ExplodeAndDamage();
